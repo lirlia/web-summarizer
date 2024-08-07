@@ -5,6 +5,8 @@ type Config struct {
 	SlackAppToken string `env:"SLACK_APP_TOKEN"`
 	SlackBotToken string `env:"SLACK_BOT_TOKEN"`
 
+	LogWebhookURL string `env:"LOG_WEBHOOK_URL"`
+
 	AzureOpenAPIKey       string `env:"AZURE_OPEN_API_KEY"`
 	AzureOpenAPIEndpoint  string `env:"AZURE_OPEN_API_ENDPOINT"`
 	AzureOpenAPIVersion   string `env:"AZURE_OPEN_API_VERSION" envDefault:"2024-06-01"`

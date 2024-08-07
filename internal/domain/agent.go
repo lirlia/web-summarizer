@@ -1,6 +1,7 @@
 package domain
 
 import (
+	"bytes"
 	"context"
 	"crypto/tls"
 	"fmt"
@@ -20,6 +21,7 @@ type httpAgent struct {
 
 type Agent interface {
 	Get(ctx context.Context, url string) ([]byte, error)
+	Post(ctx context.Context, url string, body []byte) ([]byte, error)
 }
 
 func NewHTTPAgent(opts ...AgentOption) Agent {
@@ -49,6 +51,31 @@ func WithHeaders(headers map[string]string) AgentOption {
 	return func(a *httpAgent) {
 		a.headers = headers
 	}
+}
+
+func (a *httpAgent) Post(_ context.Context, url string, body []byte) ([]byte, error) {
+	req, err := http.NewRequest("POST", url, bytes.NewReader(body))
+	if err != nil {
+		return nil, goerr.Wrap(err)
+	}
+
+	req.Header.Set("User-Agent", userAgent)
+	for k, v := range a.headers {
+		req.Header.Set(k, v)
+	}
+
+	res, err := a.client.Do(req)
+	if err != nil {
+		return nil, goerr.Wrap(err)
+	}
+	defer res.Body.Close()
+
+	buf, err := io.ReadAll(res.Body)
+	if err != nil {
+		return nil, goerr.Wrap(err)
+	}
+
+	return buf, nil
 }
 
 func (a *httpAgent) Get(_ context.Context, url string) ([]byte, error) {

@@ -48,7 +48,7 @@ func main() {
 		os.Exit(1)
 	}
 	selfUserId := authTest.UserID
-	summarizer := domain.NewSummarizer(*gptClient, webApi)
+	summarizer := domain.NewSummarizer(*gptClient, webApi, c.LogWebhookURL)
 	l.Info("Start listening events")
 
 	defer func() {
@@ -90,7 +90,6 @@ func main() {
 						l.Debug(fmt.Sprintf("self user: %v", event))
 					}
 					continue
-
 				}
 
 				go func() {

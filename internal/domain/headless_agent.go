@@ -52,3 +52,7 @@ func (a *headlessAgent) Get(ctx context.Context, url string) ([]byte, error) {
 
 	return []byte(res), nil
 }
+
+func (a *headlessAgent) Post(ctx context.Context, url string, body []byte) ([]byte, error) {
+	return nil, goerr.New("Not implemented", nil)
+}

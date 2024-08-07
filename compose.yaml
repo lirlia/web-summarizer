@@ -7,6 +7,7 @@ services:
     environment:
       - SLACK_BOT_TOKEN=
       - SLACK_APP_TOKEN=
+      - LOG_WEBHOOK_URL=
       - AZURE_OPEN_API_KEY=
       - AZURE_OPEN_API_ENDPOINT=
     restart: always

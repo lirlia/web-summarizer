@@ -11,16 +11,22 @@ import (
 )
 
 type Summarizer struct {
-	regex       *regexp.Regexp
-	slackClient *slack.Client
-	gptClient   gptClient
+	regex         *regexp.Regexp
+	slackClient   *slack.Client
+	gptClient     gptClient
+	logWebhookURL string
+	webhookClient Agent
 }
 
-func NewSummarizer(gptClient gptClient, slackClient *slack.Client) *Summarizer {
-	return &Summarizer{
-		gptClient:   gptClient,
-		slackClient: slackClient,
+func NewSummarizer(gptClient gptClient, slackClient *slack.Client, logWebhookURL string) *Summarizer {
+	opts := []AgentOption{
+		WithHeaders(map[string]string{
+			"Accept": "application/json",
+		}),
 	}
+
+	agent := NewHTTPAgent(opts...)
+	return &Summarizer{gptClient: gptClient, slackClient: slackClient, logWebhookURL: logWebhookURL, webhookClient: agent}
 }
 
 func (s *Summarizer) extractURL(text string) (string, error) {
@@ -50,6 +56,15 @@ func (s *Summarizer) Summarize(ctx context.Context, channel, userID, msg, timest
 	}
 
 	slog.Info("URL found", "url", url)
+
+	if s.logWebhookURL != "" {
+		msg := fmt.Sprintf("url: %s, user: <@%s>", url, userID)
+		payload := fmt.Sprintf(`{"text":"%s"}`, msg)
+		_, err := s.webhookClient.Post(ctx, s.logWebhookURL, []byte(payload))
+		if err != nil {
+			slog.Warn("Failed to post log", "err", err)
+		}
+	}
 
 	c := NewContentsClient(url)
 	contents, err := c.GetContents(ctx)
