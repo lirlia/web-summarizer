@@ -57,6 +57,10 @@ func (s *Summarizer) Summarize(ctx context.Context, channel, userID, msg, timest
 		return err
 	}
 
+	if len(contents) == 0 {
+		return goerr.New("Empty contents")
+	}
+
 	res, err := s.gptClient.Summarize(ctx, contents)
 	if err != nil {
 		return err
