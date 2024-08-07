@@ -11,7 +11,6 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
       packages: write
     steps:
       - name: Set up QEMU
@@ -24,4 +23,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: lirlia/web-summarizer:latest, lirlia/web-summarizer:${{ github.sha }}
+          tags: ghcr.io/lirlia/web-summarizer:latest, ghcr.io/lirlia/web-summarizer:${{ github.sha }}
