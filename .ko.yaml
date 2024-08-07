@@ -1,0 +1,7 @@
+builds:
+  - id: web-summarizer
+    main: ./
+    ldflags:
+      - -s -w
+    flags:
+      - -trimpath

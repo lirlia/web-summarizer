@@ -1,0 +1,30 @@
+run:
+  tests: false
+  go: "1.22.0"
+  timeout: 5m
+  allow-parallel-runners: true
+
+issues:
+  exclude-files:
+    - '.*\.gen\.go$'
+linters:
+  disable-all: true
+  enable:
+    - errcheck
+    - nilerr
+    - ineffassign
+    - unused
+    - stylecheck
+    - gofmt
+    - govet
+    - predeclared
+    - copyloopvar
+
+linters-settings:
+  stylecheck:
+    # https://staticcheck.io/docs/options#checks
+    checks: ["all", "-ST1003"]
+  gofmt:
+    simplify: true
+  copyloopvar:
+    check-alias: true

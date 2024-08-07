@@ -1,0 +1,33 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended",
+        ":combinePatchMinorReleases"
+    ],
+    "postUpdateOptions": [
+        "gomodTidy"
+    ],
+    "schedule": "before 9am on monday",
+    "timezone": "Asia/Tokyo",
+    "separateMultipleMajor": true,
+    "packageRules": [
+        {
+            "groupName": "github-actions",
+            "matchManagers": [
+                "github-actions"
+            ]
+        },
+        {
+            "groupName": "go",
+            "matchManagers": [
+                "gomod"
+            ]
+        },
+        {
+            "groupName": "asdf",
+            "matchManagers": [
+                "asdf"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+bin/
+.envrc
+.idea/
+.vscode/
+*.swo
+.go-version
+.DS_Store
+tmp/
+tmp-key-file
+__debug_bin*
+
+### ginkgo
+*.test
+
+### go
+go.work.sum
