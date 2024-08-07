@@ -1,0 +1,7 @@
+__deubg_bin*
+.envrc
+.envrc.example
+.gitignore
+.vscode
+.github
+Makefile
