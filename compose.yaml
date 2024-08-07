@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  web-summarizer:
+    image: ghcr.io/lirlia/web-summarizer:latest
+    container_name: web_summarizer
+    environment:
+      - SLACK_BOT_TOKEN=
+      - SLACK_APP_TOKEN=
+      - AZURE_OPEN_API_KEY=
+      - AZURE_OPEN_API_ENDPOINT=
+    restart: always
