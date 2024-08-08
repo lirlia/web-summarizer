@@ -81,7 +81,13 @@ func (s *Summarizer) Summarize(ctx context.Context, channel, userID, msg, timest
 		return err
 	}
 
-	_, _, err = s.slackClient.PostMessageContext(ctx, channel, slack.MsgOptionTS(timestamp), slack.MsgOptionText(res, false))
+	_, _, err = s.slackClient.PostMessageContext(
+		ctx,
+		channel,
+		slack.MsgOptionTS(timestamp),
+		slack.MsgOptionText(res, false),
+		slack.MsgOptionDisableLinkUnfurl(),
+	)
 	if err != nil {
 		return goerr.Wrap(err)
 	}
