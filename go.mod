@@ -1,6 +1,6 @@
 module github.com/lirlia/web-summarizer
 
-go 1.22.5
+go 1.22
 
 require (
 	github.com/PuerkitoBio/goquery v1.9.2
@@ -10,7 +10,6 @@ require (
 	github.com/m-mizutani/goerr v0.1.14
 	github.com/sashabaranov/go-openai v1.27.1
 	github.com/slack-go/slack v0.13.1
-	golang.org/x/net v0.24.0
 )
 
 require (
@@ -24,5 +23,6 @@ require (
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
+	golang.org/x/net v0.24.0 // indirect
 	golang.org/x/sys v0.22.0 // indirect
 )

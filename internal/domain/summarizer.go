@@ -66,6 +66,16 @@ func (s *Summarizer) Summarize(ctx context.Context, channel, userID, msg, timest
 		}
 	}
 
+	defer func() {
+		if err != nil {
+			payload := fmt.Sprintf(`{"text":"%+v"}`, err)
+			_, err := s.webhookClient.Post(ctx, s.logWebhookURL, []byte(payload))
+			if err != nil {
+				slog.Warn("Failed to post log", "err", err)
+			}
+		}
+	}()
+
 	c := NewContentsClient(url)
 	contents, err := c.GetContents(ctx)
 	if err != nil {
