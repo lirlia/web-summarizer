@@ -7,7 +7,8 @@ require (
 	github.com/caarlos0/env/v11 v11.2.0
 	github.com/chromedp/chromedp v0.10.0
 	github.com/ledongthuc/pdf v0.0.0-20240201131950-da5b75280b06
-	github.com/m-mizutani/goerr v0.1.14
+	github.com/m-mizutani/goerr v1.0.0
+	github.com/m-mizutani/goerr/v2 v2.0.1
 	github.com/sashabaranov/go-openai v1.27.1
 	github.com/slack-go/slack v0.13.1
 )
