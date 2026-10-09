@@ -1,5 +1,5 @@
 # ビルドステージ
-FROM golang:1.22.5-bookworm AS build
+FROM golang:1.27.2-bookworm AS build
 
 WORKDIR /src
 
